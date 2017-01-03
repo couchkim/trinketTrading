@@ -2,8 +2,9 @@
 // set variables for trinkets and gold coins
 // Need to create button event listeners on click for buy and sell
 
-let coins = 100
-let trinkets = 0
+let coins = 100;
+let trinkets = 0;
+let exchange = 0;
 
 
 
@@ -12,7 +13,8 @@ window.addEventListener ('load', function (){
 
     showCoins();
     showTrinkets();
-    showExchange();
+    getExchange();
+    setInterval(getExchange, 10000);
 
     let buy = document.querySelector('#buy');
     buy.addEventListener('click', buyTrinket);
@@ -23,42 +25,72 @@ window.addEventListener ('load', function (){
 })
 
 function showCoins(){
-    let parent = document.querySelector('.goldCoins');
     
-    let coinNumber = document.createElement('p');
+    let coinNumber = document.querySelector('.goldCoins p');
     coinNumber.textContent = coins;
-    parent.appendChild(coinNumber);
+    
 
 };
 
 function showTrinkets(){
 
-    let parent = document.querySelector('.trinkets');
     
-    let trinketNumber = document.createElement('p');
+    
+    let trinketNumber = document.querySelector('.trinkets p');
     trinketNumber.textContent = trinkets;
-    parent.appendChild(trinketNumber);
+   
 
 };
 
-function showExchange(){
+function getExchange(){
     let request = new XMLHttpRequest();
     request.open('GET', 'http://api.queencityiron.com/trinkets');
     request.addEventListener('load', function(){
         let response = JSON.parse(request.responseText);
-
         console.log(response);
-    })
+        exchange = response.exchange;
+        showExchange(exchange);
+           });
+    
 
     request.send();
 
 }
 
+
+function showExchange(number){
+
+        let parent = document.querySelector('.exchange');
+
+        let exchangeRate = document.createElement('p');
+        exchangeRate.textContent = number.toFixed(4);
+        parent.appendChild(exchangeRate);
+
+}
+        
+   
 function buyTrinket(){
+    if (coins >= exchange){
+        coins = coins - exchange;
+        trinkets = trinkets + 1;
+    };
+
+   
+    showCoins();
+  
+    showTrinkets();
 
 }
 
 function sellTrinket(){
+    if (trinkets > 0){
+        coins = coins + exchange;
+        trinkets = trinkets - 1;
+    };
 
+   
+    showCoins();
+  
+    showTrinkets();
     
 }
