@@ -53,3 +53,12 @@ function showExchange(){
     request.send();
 
 }
+
+function buyTrinket(){
+
+}
+
+function sellTrinket(){
+
+    
+}
