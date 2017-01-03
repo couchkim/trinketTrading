@@ -2,7 +2,7 @@
 // set variables for trinkets and gold coins
 // Need to create button event listeners on click for buy and sell
 
-let coins = 100;
+let coins = 300;
 let trinkets = 0;
 let exchange = 0;
 
@@ -27,7 +27,7 @@ window.addEventListener ('load', function (){
 function showCoins(){
     
     let coinNumber = document.querySelector('.goldCoins p');
-    coinNumber.textContent = coins;
+    coinNumber.textContent = coins.toFixed(0);
     
 
 };
@@ -37,7 +37,7 @@ function showTrinkets(){
     
     
     let trinketNumber = document.querySelector('.trinkets p');
-    trinketNumber.textContent = trinkets;
+    trinketNumber.textContent = trinkets.toFixed(0);
    
 
 };
@@ -60,11 +60,9 @@ function getExchange(){
 
 function showExchange(number){
 
-        let parent = document.querySelector('.exchange');
-
-        let exchangeRate = document.createElement('p');
+        let exchangeRate = document.querySelector('.exchange p');
         exchangeRate.textContent = number.toFixed(4);
-        parent.appendChild(exchangeRate);
+        
 
 }
         

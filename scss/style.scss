@@ -8,5 +8,50 @@
 @import 'header';
 
 body{
-    background-color:lightsalmon;
+    background-color:lightseagreen;
+}
+
+header{
+    @include grid-row();
+
+    h1{
+        @include grid-column(12);
+        text-align: center;
+        color:darkgoldenrod;
+        font-size: 1.5em;
+    }
+}
+
+main{
+    @include grid-row();
+     text-align: center;
+
+    .goldCoins, .trinkets, .exchange{
+        @include grid-column(4);
+        padding: 2%;
+        border-radius: 10%;
+        border: 2px solid darkgoldenrod;
+        background-color: goldenrod;
+        color:seagreen;
+        font-size: 1.5em;
+       
+    }
+
+}
+
+.buttons{
+    @include grid-row();
+    
+
+    #buy, #sell{
+        @include grid-column(2);
+        padding: 2%;
+        border-radius: 10%;
+        border: 2px solid darkgoldenrod;
+        background-color: goldenrod;
+        color:seagreen;
+        font-size: 1em;
+    }
+
+    
 }
