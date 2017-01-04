@@ -59,11 +59,14 @@ footer{
 
     .transactions{
         @include grid-column (6);
-        list-style-type: none;
-        padding: 0;
         text-align: center;
         color: darkblue;
-    
+        
+        #list{
+            list-style-type: none;
+            padding: 0;
+            
+        }
 
     
     }

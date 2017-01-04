@@ -6,8 +6,7 @@ let coins = 300;
 let trinkets = 0;
 let exchange = 0;
 
-let buyList = [];
-let sellList = [];
+let transactions = [];
 
 
 
@@ -18,8 +17,6 @@ window.addEventListener ('load', function (){
     showTrinkets();
     getExchange();
     setInterval(getExchange, 10000);
-    // showBuyList(buyList);
-    // showSellList(sellList);
 
     let buy = document.querySelector('#buy');
     buy.addEventListener('click', buyTrinket);
@@ -39,12 +36,9 @@ function showCoins(){
 
 function showTrinkets(){
 
-    
-    
     let trinketNumber = document.querySelector('.trinkets p');
     trinketNumber.textContent = trinkets.toFixed(0);
    
-
 };
 
 function getExchange(){
@@ -67,8 +61,7 @@ function showExchange(number){
 
         let exchangeRate = document.querySelector('.exchange p');
         exchangeRate.textContent = number.toFixed(4);
-        
-
+    
 }
         
    
@@ -76,16 +69,14 @@ function buyTrinket(){
     if (coins >= exchange){
         coins = coins - exchange;
         trinkets = trinkets + 1;
-        buyList.push(exchange)
-        console.log(buyList);
+        transactions.push({type:'bought', rate: exchange});
+        console.log(transactions);
     };
 
    
     showCoins();
-  
     showTrinkets();
-
-    showBuyList(buyList);
+    showTransactions(transactions);
 
 }
 
@@ -93,36 +84,23 @@ function sellTrinket(){
     if (trinkets > 0){
         coins = coins + exchange;
         trinkets = trinkets - 1;
-        sellList.push(exchange);
+        
+        transactions.push({type:'sold', rate: exchange});
     };
 
    
     showCoins();
-  
     showTrinkets();
-
-    
-    showSellList(sellList);
-
-
+    showTransactions(transactions);
     
 }
 
-function showBuyList(buys){
+function showTransactions(deals){
     
-    for (i=0; i<buys.length; i++){
-    let parent = document.querySelector('.transactions')
-    let buyItems = document.createElement('li')
-    buyItems.textContent = "1 trinket bought for " + buys[i].toFixed(0) + " gold coins."
-    parent.appendChild(buyItems);
+    for (i=0; i<deals.length; i++){
+    let parent = document.querySelector('#list')
+    let items = document.createElement('li')
+    items.textContent = "1 trinket " + deals[i].type + " for " + (deals[i].rate).toFixed(0) + " gold coins."
+    parent.appendChild(items);
 }
-}
-function showSellList(sells){
-    for (i=0; i<sells.length; i++){
-    let parent = document.querySelector('.transactions')
-    let sellItems = document.createElement('li')
-    // sellItems.innerHTML="";
-    sellItems.textContent = "1 trinket sold for " + sells[i].toFixed(0) + " gold coins."
-    parent.appendChild(sellItems);
-    }
 }
