@@ -39,12 +39,15 @@ main{
 
 }
 
-.buttons{
+footer{
     @include grid-row();
+    
+    .buttons{
+        @include grid-column(6);
     
 
     #buy, #sell{
-        @include grid-column(2);
+        margin: 10%;
         padding: 2%;
         border-radius: 10%;
         border: 2px solid darkgoldenrod;
@@ -52,6 +55,23 @@ main{
         color:seagreen;
         font-size: 1em;
     }
+    }
+
+    .transactions{
+        @include grid-column (6);
+        list-style-type: none;
+        padding: 0;
+        text-align: center;
+        color: darkblue;
+    
 
     
+    }
+    
 }
+
+
+        li{
+            color: darkred;
+        }
+    

@@ -6,6 +6,9 @@ let coins = 300;
 let trinkets = 0;
 let exchange = 0;
 
+let buyList = [];
+let sellList = [];
+
 
 
 window.addEventListener ('load', function (){
@@ -15,6 +18,8 @@ window.addEventListener ('load', function (){
     showTrinkets();
     getExchange();
     setInterval(getExchange, 10000);
+    // showBuyList(buyList);
+    // showSellList(sellList);
 
     let buy = document.querySelector('#buy');
     buy.addEventListener('click', buyTrinket);
@@ -71,12 +76,16 @@ function buyTrinket(){
     if (coins >= exchange){
         coins = coins - exchange;
         trinkets = trinkets + 1;
+        buyList.push(exchange)
+        console.log(buyList);
     };
 
    
     showCoins();
   
     showTrinkets();
+
+    showBuyList(buyList);
 
 }
 
@@ -84,11 +93,36 @@ function sellTrinket(){
     if (trinkets > 0){
         coins = coins + exchange;
         trinkets = trinkets - 1;
+        sellList.push(exchange);
     };
 
    
     showCoins();
   
     showTrinkets();
+
     
+    showSellList(sellList);
+
+
+    
+}
+
+function showBuyList(buys){
+    
+    for (i=0; i<buys.length; i++){
+    let parent = document.querySelector('.transactions')
+    let buyItems = document.createElement('li')
+    buyItems.textContent = "1 trinket bought for " + buys[i].toFixed(0) + " gold coins."
+    parent.appendChild(buyItems);
+}
+}
+function showSellList(sells){
+    for (i=0; i<sells.length; i++){
+    let parent = document.querySelector('.transactions')
+    let sellItems = document.createElement('li')
+    // sellItems.innerHTML="";
+    sellItems.textContent = "1 trinket sold for " + sells[i].toFixed(0) + " gold coins."
+    parent.appendChild(sellItems);
+    }
 }
