@@ -18,6 +18,7 @@ window.addEventListener ('load', function (){
     getExchange();
     setInterval(getExchange, 10000);
 
+
     let buy = document.querySelector('#buy');
     buy.addEventListener('click', buyTrinket);
 
@@ -49,6 +50,13 @@ function getExchange(){
         console.log(response);
         exchange = response.exchange;
         showExchange(exchange);
+        
+        if(exchange <45){
+        buyTrinket();
+         }
+        if(exchange >65){
+        sellTrinket();
+         }
            });
     
 
@@ -63,7 +71,6 @@ function showExchange(number){
         exchangeRate.textContent = number.toFixed(4);
     
 }
-        
    
 function buyTrinket(){
     if (coins >= exchange){
