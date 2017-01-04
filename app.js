@@ -96,9 +96,11 @@ function sellTrinket(){
 }
 
 function showTransactions(deals){
+     
+     let parent = document.querySelector('#list');
+     parent.innerHTML = '';
     
     for (i=0; i<deals.length; i++){
-    let parent = document.querySelector('#list')
     let items = document.createElement('li')
     items.textContent = "1 trinket " + deals[i].type + " for " + (deals[i].rate).toFixed(0) + " gold coins."
     parent.appendChild(items);
